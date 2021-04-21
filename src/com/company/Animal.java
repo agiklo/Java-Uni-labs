@@ -4,7 +4,7 @@ import java.io.File;
 
 public class Animal {
 
-    private final String species;
+    public final String species;
     public Double weight;
     public String name;
     public File pic;
