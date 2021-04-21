@@ -6,14 +6,23 @@ public class Human {
     private String lastName;
     private Animal pet;
     private Phone phone;
+    private Car car;
 
-    public Human() {}
+
 
     public Human(String firstName, String lastName, Animal pet, Phone phone) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.pet = pet;
         this.phone = phone;
+    }
+
+    public Human(String firstName, String lastName, Animal pet, Phone phone, Car car) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.pet = pet;
+        this.phone = phone;
+        this.car = car;
     }
 
     public String getFirstName() {
@@ -36,6 +45,14 @@ public class Human {
         return pet;
     }
 
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
     public void setPet(Animal pet) {
         this.pet = pet;
     }
@@ -55,6 +72,7 @@ public class Human {
                 ", lastName='" + lastName + '\'' +
                 ", pet=" + pet +
                 ", phone=" + phone +
+                ", car=" + car +
                 '}';
     }
 }

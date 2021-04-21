@@ -17,5 +17,10 @@ public class Main {
         System.out.println(cat);
         cat.takeForAWalk();
         cat.feed();
+
+        //ex2
+        Car car = new Car("A6", "Audi", COLOR.BLACK, 5);
+        Human human = new Human("Mateusz", "Milewczyk", cat, null, car);
+        System.out.println(human);
     }
 }
