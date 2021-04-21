@@ -1,12 +1,15 @@
 package com.company;
 
+import java.time.LocalDateTime;
+
 public class Human {
 
-    private String firstName;
-    private String lastName;
-    private Animal pet;
-    private Phone phone;
-    private Car car;
+    public String firstName;
+    public String lastName;
+    public Animal pet;
+    public Phone phone;
+    public Car car;
+    private Double salary;
 
     public Human(String firstName, String lastName) {
         this.firstName = firstName;
@@ -28,46 +31,6 @@ public class Human {
         this.car = car;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Animal getPet() {
-        return pet;
-    }
-
-    public Car getCar() {
-        return car;
-    }
-
-    public void setCar(Car car) {
-        this.car = car;
-    }
-
-    public void setPet(Animal pet) {
-        this.pet = pet;
-    }
-
-    public Phone getPhone() {
-        return phone;
-    }
-
-    public void setPhone(Phone phone) {
-        this.phone = phone;
-    }
-
     @Override
     public String toString() {
         return "Human{" +
@@ -76,6 +39,35 @@ public class Human {
                 ", pet=" + pet +
                 ", phone=" + phone +
                 ", car=" + car +
+                ", salary=" + salary +
                 '}';
+    }
+
+    public Double getSalary() {
+        LocalDateTime time = LocalDateTime.now();
+        System.out.println("Date: " + time  + ", Salary: " + salary);
+        return salary;
+    }
+
+    public void setSalary(Double salary) {
+        if (salary < 0) {
+            throw new IllegalArgumentException("Salary have to be greater than 0");
+        }
+        sendToAccountingSystem();
+        collectAnnex();
+        informZusandUS();
+        this.salary = salary;
+    }
+
+    private void sendToAccountingSystem(){
+        System.out.println("The data has been sent to the accounting system");
+    }
+
+    private void collectAnnex(){
+        System.out.println("The need to collect the annex to the contract from Ms Hania from HR");
+    }
+
+    private void informZusandUS(){
+        System.out.println("ZUS and US already know about the change in payment, it makes no sense to hide your income");
     }
 }

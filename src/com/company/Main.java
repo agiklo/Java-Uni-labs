@@ -23,5 +23,9 @@ public class Main {
         Phone phone = new Phone("Apple", "IPhone 8", 4.7, "IOS");
         Human human = new Human("Mateusz", "Milewczyk", cat, phone, car);
         System.out.println(human);
+
+        //ex3
+        human.setSalary(2000.2);
+        human.getSalary();
     }
 }
