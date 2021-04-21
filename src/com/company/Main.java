@@ -19,13 +19,17 @@ public class Main {
         cat.feed();
 
         //ex2
-        Car car = new Car("A6", "Audi", COLOR.BLACK, 5);
+        Car car = new Car("A6", "Audi", COLOR.BLACK, 5, 50_000.00);
         Phone phone = new Phone("Apple", "IPhone 8", 4.7, "IOS");
-        Human human = new Human("Mateusz", "Milewczyk", cat, phone, car);
+        Human human = new Human("Mateusz", "Milewczyk");
         System.out.println(human);
 
         //ex3
-        human.setSalary(2000.2);
+        human.setSalary(12000.00);
         human.getSalary();
+
+        //ex5
+        human.setCar(car);
+        System.out.println(human.getCar());
     }
 }

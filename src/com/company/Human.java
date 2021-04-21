@@ -8,7 +8,7 @@ public class Human {
     public String lastName;
     public Animal pet;
     public Phone phone;
-    public Car car;
+    private Car car;
     private Double salary;
 
     public Human(String firstName, String lastName) {
@@ -41,6 +41,24 @@ public class Human {
                 ", car=" + car +
                 ", salary=" + salary +
                 '}';
+    }
+
+    public Car getCar(){
+        return car;
+    }
+
+    public void setCar(Car car) {
+        if (salary > car.value) {
+            System.out.println("You managed to buy a car with cash");
+            this.car = car;
+        }
+        else if (salary > car.value/12) {
+            System.out.println("You bought a car on credit");
+            this.car = car;
+        }
+        else {
+            System.out.println("Enroll in college and find a new job or take a raise!");
+        }
     }
 
     public Double getSalary() {

@@ -6,12 +6,14 @@ public class Car {
     private final String producer;
     private COLOR color;
     private final int doors;
+    public Double value;
 
-    public Car(String model, String producer, COLOR color, int doors) {
+    public Car(String model, String producer, COLOR color, int doors, Double value) {
         this.model = model;
         this.producer = producer;
         this.color = color;
         this.doors = doors;
+        this.value = value;
     }
 
     public String getModel() {
