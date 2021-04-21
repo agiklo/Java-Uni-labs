@@ -8,7 +8,10 @@ public class Human {
     private Phone phone;
     private Car car;
 
-
+    public Human(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     public Human(String firstName, String lastName, Animal pet, Phone phone) {
         this.firstName = firstName;
