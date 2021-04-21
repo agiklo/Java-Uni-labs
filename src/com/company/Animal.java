@@ -5,9 +5,9 @@ import java.io.File;
 public class Animal {
 
     private final String species;
-    private Double weight;
-    private String name;
-    private File pic;
+    public Double weight;
+    public String name;
+    public File pic;
 
     public Animal(String species, Double weight, String name, File pic) {
         this.species = species;
@@ -30,34 +30,6 @@ public class Animal {
             this.weight--;
         }
         else System.out.println("Your pet is dead");
-    }
-
-    public String getSpecies() {
-        return species;
-    }
-
-    public Double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(Double weight) {
-        this.weight = weight;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public File getPic() {
-        return pic;
-    }
-
-    public void setPic(File pic) {
-        this.pic = pic;
     }
 
     @Override
