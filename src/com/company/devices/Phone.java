@@ -1,5 +1,7 @@
 package com.company.devices;
 
+import com.company.Human;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -28,6 +30,39 @@ public class Phone extends Device{
                 ", screenSize=" + screenSize +
                 ", operatingSystem='" + operatingSystem + '\'' +
                 '}';
+    }
+
+    @Override
+    public void sell(Human seller, Human buyer, Double price) {
+        if (hasPhone(seller) && hasEnoughMoney(buyer, price)) {
+            trade(seller, buyer, price);
+            System.out.println("Transaction is done");
+        } else {
+            System.out.println("Transactin cannot be done");
+        }
+    }
+
+    private boolean hasPhone(Human seller) {
+        return seller.phone == this;
+    }
+
+    private boolean hasEnoughMoney(Human buyer, Double price) {
+        return buyer.cash > price;
+    }
+
+    private void trade(Human seller, Human buyer, Double price) {
+        changeAmountsOfMoney(seller, buyer, price);
+        switchOwners(seller, buyer);
+    }
+
+    private void changeAmountsOfMoney(Human seller, Human buyer, Double price){
+        seller.cash = seller.cash + price;
+        buyer.cash = buyer.cash - price;
+    }
+
+    private void switchOwners(Human seller, Human buyer){
+        buyer.phone = seller.phone;
+        seller.phone = null;
     }
 
     @Override

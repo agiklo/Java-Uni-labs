@@ -2,7 +2,7 @@ package com.company;
 
 import java.io.File;
 
-public class Animal {
+public class Animal implements salleable{
 
     public final String species;
     public Double weight;
@@ -30,6 +30,39 @@ public class Animal {
             this.weight--;
         }
         else System.out.println("Your pet is dead");
+    }
+
+    @Override
+    public void sell(Human seller, Human buyer, Double price) {
+        if (hasAnimal(seller) && hasEnoughMoney(buyer, price)) {
+            trade(seller, buyer, price);
+            System.out.println("Transaction is done");
+        } else {
+            System.out.println("Transactin cannot be done");
+        }
+    }
+
+    private boolean hasAnimal(Human seller) {
+        return seller.pet == this;
+    }
+
+    private boolean hasEnoughMoney(Human buyer, Double price) {
+        return buyer.cash > price;
+    }
+
+    private void trade(Human seller, Human buyer, Double price) {
+        changeAmountsOfMoney(seller, buyer, price);
+        switchOwners(seller, buyer);
+    }
+
+    private void changeAmountsOfMoney(Human seller, Human buyer, Double price){
+        seller.cash = seller.cash + price;
+        buyer.cash = buyer.cash - price;
+    }
+
+    private void switchOwners(Human seller, Human buyer){
+        buyer.pet = seller.pet;
+        seller.pet = null;
     }
 
     @Override

@@ -5,7 +5,7 @@ import com.company.devices.Phone;
 
 import java.time.LocalDateTime;
 
-public class Human {
+public class Human{
 
     public String firstName;
     public String lastName;
@@ -13,25 +13,28 @@ public class Human {
     public Phone phone;
     private Car car;
     private Double salary;
+    public Double cash;
 
     public Human(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public Human(String firstName, String lastName, Animal pet, Phone phone) {
+    public Human(String firstName, String lastName, Animal pet, Phone phone, Double cash) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.pet = pet;
         this.phone = phone;
+        this.cash = cash;
     }
 
-    public Human(String firstName, String lastName, Animal pet, Phone phone, Car car) {
+    public Human(String firstName, String lastName, Animal pet, Phone phone, Car car, Double cash) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.pet = pet;
         this.phone = phone;
         this.car = car;
+        this.cash = cash;
     }
 
     @Override
@@ -43,11 +46,20 @@ public class Human {
                 ", phone=" + phone +
                 ", car=" + car +
                 ", salary=" + salary +
+                ", cash=" + cash +
                 '}';
     }
 
     public Car getCar(){
         return car;
+    }
+
+    public void boughtCar(Car car){
+        this.car = car;
+    }
+
+    public void soldCar(){
+        car = null;
     }
 
     public void setCar(Car car) {

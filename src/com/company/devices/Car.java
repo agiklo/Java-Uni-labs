@@ -1,5 +1,6 @@
 package com.company.devices;
 
+import com.company.Human;
 import com.company.enums.COLOR;
 
 import java.time.LocalDate;
@@ -21,6 +22,39 @@ public class Car extends Device{
     @Override
     public void turnOn() {
         System.out.println("Car is turn on");
+    }
+
+    @Override
+    public void sell(Human seller, Human buyer, Double price) {
+        if (hasCar(seller) && hasEnoughMoney(buyer, price)) {
+            trade(seller, buyer, price);
+            System.out.println("Transaction is done");
+        } else {
+            System.out.println("Transactin cannot be done");
+        }
+    }
+
+    private boolean hasCar(Human seller) {
+        return seller.getCar() == this;
+    }
+
+    private boolean hasEnoughMoney(Human buyer, Double price) {
+        return buyer.cash > price;
+    }
+
+    private void trade(Human seller, Human buyer, Double price) {
+        changeAmountsOfMoney(seller, buyer, price);
+        switchOwners(seller, buyer);
+    }
+
+    private void changeAmountsOfMoney(Human seller, Human buyer, Double price){
+        seller.cash = seller.cash + price;
+        buyer.cash = buyer.cash - price;
+    }
+
+    private void switchOwners(Human seller, Human buyer){
+        buyer.boughtCar(seller.getCar());
+        seller.soldCar();
     }
 
     @Override
