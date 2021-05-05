@@ -1,8 +1,11 @@
-package com.company;
+package com.company.creatures;
+
+import com.company.Human;
+import com.company.Salleable;
 
 import java.io.File;
 
-public class Animal implements salleable{
+public abstract class Animal implements Salleable, Feedable {
 
     public final String species;
     public Double weight;
@@ -16,7 +19,7 @@ public class Animal implements salleable{
         this.pic = pic;
     }
 
-    void feed(){
+    public void feed(){
         if (weight > 0) {
             System.out.println("thx for food");
             this.weight++;
@@ -24,7 +27,7 @@ public class Animal implements salleable{
         else System.out.println("Your pet is dead");
     }
 
-    void takeForAWalk() {
+    public void takeForAWalk() {
         if (weight > 0) {
             System.out.println("thx for walk");
             this.weight--;
