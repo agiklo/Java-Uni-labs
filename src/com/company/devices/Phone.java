@@ -1,15 +1,15 @@
 package com.company.devices;
 
-public class Phone {
+import java.time.LocalDate;
+import java.util.Objects;
 
-    public final String producer;
-    public final String model;
+public class Phone extends Device{
+
     public final Double screenSize;
     public String operatingSystem;
 
-    public Phone(String producer, String model, Double screenSize, String operatingSystem) {
-        this.producer = producer;
-        this.model = model;
+    public Phone(String producer, String model, LocalDate yearOfProduction, Double screenSize, String operatingSystem) {
+        super(producer, model, yearOfProduction);
         this.screenSize = screenSize;
         this.operatingSystem = operatingSystem;
     }
@@ -19,8 +19,22 @@ public class Phone {
         return "Phone{" +
                 "producer='" + producer + '\'' +
                 ", model='" + model + '\'' +
+                ", yearOfProduction=" + yearOfProduction +
                 ", screenSize=" + screenSize +
                 ", operatingSystem='" + operatingSystem + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Phone phone = (Phone) o;
+        return Objects.equals(screenSize, phone.screenSize) && Objects.equals(operatingSystem, phone.operatingSystem);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(screenSize, operatingSystem);
     }
 }
