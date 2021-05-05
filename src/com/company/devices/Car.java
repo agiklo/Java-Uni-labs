@@ -19,6 +19,11 @@ public class Car extends Device{
     }
 
     @Override
+    public void turnOn() {
+        System.out.println("Car is turn on");
+    }
+
+    @Override
     public String toString() {
         return "Car{" +
                 "color=" + color +

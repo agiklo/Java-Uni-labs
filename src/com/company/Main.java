@@ -51,6 +51,7 @@ public class Main {
 
         //ex7
         mercedes.turnOn();
+        phone.turnOn();
         System.out.println(mercedes);
     }
 }

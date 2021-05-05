@@ -15,6 +15,11 @@ public class Phone extends Device{
     }
 
     @Override
+    public void turnOn() {
+        System.out.println("Phone is turn on");
+    }
+
+    @Override
     public String toString() {
         return "Phone{" +
                 "producer='" + producer + '\'' +

@@ -13,9 +13,7 @@ public abstract class Device {
         this.yearOfProduction = yearOfProduction;
     }
 
-    public void turnOn(){
-        System.out.println("Device is turn on");
-    }
+    public abstract void turnOn();
 
     @Override
     public String toString() {
