@@ -11,13 +11,11 @@ public abstract class Car extends Device {
 
     public COLOR color;
     public final int doors;
-    public Double value;
 
     protected Car(String producer, String model, LocalDate yearOfProduction, COLOR color, int doors, Double value) {
-        super(producer, model, yearOfProduction);
+        super(producer, model, yearOfProduction, value);
         this.color = color;
         this.doors = doors;
-        this.value = value;
     }
 
     public abstract void refuel();
@@ -28,48 +26,41 @@ public abstract class Car extends Device {
     }
 
     @Override
-    public void sell(Human seller, Human buyer, Double price) {
-        if (hasCar(seller) && hasEnoughMoney(buyer, price)) {
-            trade(seller, buyer, price);
-            System.out.println("Transaction is done");
-        } else {
-            System.out.println("Transactin cannot be done");
+    public void sell(Human seller, Human buyer, Double price) throws Exception {
+        if(!seller.hasCar(this)){
+            throw new Exception("Seller doesn't have required car");
         }
-    }
-
-    private boolean hasCar(Human seller) {
-        return seller.getCar() == this;
+        if(!buyer.hasFreeSpace()){
+            throw new Exception("Buyer doesn't have enough space in garage");
+        }
+        if (!hasEnoughMoney(buyer, price)){
+            throw new Exception("Buyer doesn't have enough money");
+        }
+        seller.removeCar(this);
+        buyer.addCar(this);
+        changeAmountsOfMoney(seller, buyer, price);
+        System.out.println("Sold");
     }
 
     private boolean hasEnoughMoney(Human buyer, Double price) {
         return buyer.cash > price;
     }
 
-    private void trade(Human seller, Human buyer, Double price) {
-        changeAmountsOfMoney(seller, buyer, price);
-        switchOwners(seller, buyer);
-    }
-
     private void changeAmountsOfMoney(Human seller, Human buyer, Double price){
-        seller.cash = seller.cash + price;
-        buyer.cash = buyer.cash - price;
-    }
-
-    private void switchOwners(Human seller, Human buyer){
-        buyer.boughtCar(seller.getCar());
-        seller.soldCar();
+        seller.cash += price;
+        buyer.cash -= price;
     }
 
     @Override
     public String toString() {
-        return "Car{" +
-                "color=" + color +
-                ", doors=" + doors +
-                ", value=" + value +
-                ", producer='" + producer + '\'' +
-                ", model='" + model + '\'' +
-                ", yearOfProduction=" + yearOfProduction +
-                '}';
+        return "\nCar {\n" +
+                "   color=" + color +
+                ",\n   doors=" + doors +
+                ",\n   value=" + value +
+                ",\n   producer='" + producer + '\'' +
+                ",\n   model='" + model + '\'' +
+                ",\n   yearOfProduction=" + yearOfProduction +
+                "\n}\n";
     }
 
     @Override

@@ -15,8 +15,8 @@ public class Phone extends Device{
     public static final String DEFAULT_APP_SERVER = "agiklo.apps.appstore.com";
     public static final String DEFAULT_APP_NAME = "photomath";
 
-    public Phone(String producer, String model, LocalDate yearOfProduction, Double screenSize, String operatingSystem) {
-        super(producer, model, yearOfProduction);
+    public Phone(String producer, String model, LocalDate yearOfProduction, Double value, Double screenSize, String operatingSystem) {
+        super(producer, model, yearOfProduction, value);
         this.screenSize = screenSize;
         this.operatingSystem = operatingSystem;
     }

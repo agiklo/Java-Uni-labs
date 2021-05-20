@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        Phone iphone = new Phone("Apple", "X", LocalDate.of(2019, 1, 1), 5.3, "IOS");
+        Phone iphone = new Phone("Apple", "X", LocalDate.of(2019, 1, 1), 1300.0, 5.3, "IOS");
         iphone.installAnApp("Angry Birds");
         iphone.installAnApp("Angry birds", "1.0.4");
         iphone.installAnnApp("Angry birds", "6.3.1", "angrybirds.appstore.com");
@@ -26,10 +26,17 @@ public class Main {
 
         Car tesla = new Electric("Tesla", "X", LocalDate.of(2017, 1, 1), COLOR.BLACK, 5, 277_000.0);
         Car mercedes = new LPG("Mercedes-Benz", "E 200", LocalDate.of(2006, 1, 1), COLOR.WHITE, 4, 20_900.0);
-        Car ford = new Disel("Ford", "Mondeo", LocalDate.of(2017, 1, 1), COLOR.BLUE, 5, 53_998.0);
-
+        Car ford = new Disel("Ford", "Mondeo", LocalDate.of(2016, 1, 1), COLOR.BLUE, 5, 53_998.0);
         tesla.refuel();
         mercedes.refuel();
         ford.refuel();
+
+        Human human = new Human("Mateusz", "Milewczyk", 3);
+        human.setSalary(5_000_000.00);
+        human.setCar(0, tesla);
+        human.setCar(1, mercedes);
+        human.setCar(2, ford);
+        System.out.println(human.getTotalValueOfGarage());
+        System.out.println(human.sortCarsByProductionYear());
     }
 }
