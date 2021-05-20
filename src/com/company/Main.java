@@ -1,23 +1,35 @@
 package com.company;
 
-import com.company.creatures.Animal;
-import com.company.creatures.FarmAnimal;
-import com.company.creatures.Pet;
+import com.company.devices.Phone;
+import com.company.devices.car.Car;
+import com.company.devices.car.Disel;
+import com.company.devices.car.Electric;
+import com.company.devices.car.LPG;
+import com.company.enums.COLOR;
+
+import java.net.URL;
+import java.time.LocalDate;
 
 public class Main {
 
-    public static void main(String[] args) {
-        Animal cat = new Pet("Felis catus", 2.0, "Śierściuch", null);
-        Animal cow = new FarmAnimal("Krowowata", 60.0, "Krowka", null);
-        System.out.println(cat);
-        cat.feed();
-        cow.feed();
-        cow.feed(3.0);
-        cat.feed(1.0);
-        System.out.println(cat);
-        System.out.println(cow);
-        cat.takeForAWalk();
-        cow.takeForAWalk();
-        ((FarmAnimal) cow).beEaten();
+    public static void main(String[] args) throws Exception {
+        Phone iphone = new Phone("Apple", "X", LocalDate.of(2019, 1, 1), 5.3, "IOS");
+        iphone.installAnApp("Angry Birds");
+        iphone.installAnApp("Angry birds", "1.0.4");
+        iphone.installAnnApp("Angry birds", "6.3.1", "angrybirds.appstore.com");
+
+        URL url = new URL(Phone.DEFAULT_APP_PROTOCOL, Phone.DEFAULT_APP_SERVER,Phone.DEFAULT_APP_NAME + "-" + "latest");
+        iphone.installAnApp(url);
+
+        String[] names = {"Angry Testers", "Angry Deadlines", "Angry clients"};
+        iphone.installAnApp(names);
+
+        Car tesla = new Electric("Tesla", "X", LocalDate.of(2017, 1, 1), COLOR.BLACK, 5, 277_000.0);
+        Car mercedes = new LPG("Mercedes-Benz", "E 200", LocalDate.of(2006, 1, 1), COLOR.WHITE, 4, 20_900.0);
+        Car ford = new Disel("Ford", "Mondeo", LocalDate.of(2017, 1, 1), COLOR.BLUE, 5, 53_998.0);
+
+        tesla.refuel();
+        mercedes.refuel();
+        ford.refuel();
     }
 }

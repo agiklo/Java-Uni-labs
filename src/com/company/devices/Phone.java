@@ -2,13 +2,18 @@ package com.company.devices;
 
 import com.company.Human;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class Phone extends Device{
 
     public final Double screenSize;
-    public String operatingSystem;
+    public final String operatingSystem;
+    public static final String DEFAULT_APP_PROTOCOL = "Https";
+    public static final String DEFAULT_APP_SERVER = "agiklo.apps.appstore.com";
+    public static final String DEFAULT_APP_NAME = "photomath";
 
     public Phone(String producer, String model, LocalDate yearOfProduction, Double screenSize, String operatingSystem) {
         super(producer, model, yearOfProduction);
@@ -16,20 +21,38 @@ public class Phone extends Device{
         this.operatingSystem = operatingSystem;
     }
 
-    @Override
-    public void turnOn() {
-        System.out.println("Phone is turn on");
+    public void installAnApp(String name) throws Exception {
+        if (name.equals("")) {
+            throw new Exception("The application must have a name");
+        }
+        this.installAnApp(name, "latest");
+    }
+
+    public void installAnApp(String name, String version) throws MalformedURLException {
+        URL url = new URL(DEFAULT_APP_PROTOCOL, DEFAULT_APP_SERVER,name + "-" + version);
+        this.installAnApp(url);
+    }
+
+    public void installAnnApp(String name, String version, String serverAdress){
+        System.out.println("Correctly installed " + name + "-" + version + " from " + serverAdress);
+    }
+
+    public void installAnApp(String[] names) throws Exception {
+        if (names.length == 0) {
+            throw new Exception("No applications were specified");
+        }
+        for (String name : names) {
+            this.installAnApp(name);
+        }
+    }
+
+    public void installAnApp(URL url){
+        System.out.println("Correctly installed " + url.getFile() + " from " + url.getHost());
     }
 
     @Override
-    public String toString() {
-        return "Phone{" +
-                "producer='" + producer + '\'' +
-                ", model='" + model + '\'' +
-                ", yearOfProduction=" + yearOfProduction +
-                ", screenSize=" + screenSize +
-                ", operatingSystem='" + operatingSystem + '\'' +
-                '}';
+    public void turnOn() {
+        System.out.println("Phone is turn on");
     }
 
     @Override
@@ -63,6 +86,17 @@ public class Phone extends Device{
     private void switchOwners(Human seller, Human buyer){
         buyer.phone = seller.phone;
         seller.phone = null;
+    }
+
+    @Override
+    public String toString() {
+        return "Phone{" +
+                "producer='" + producer + '\'' +
+                ", model='" + model + '\'' +
+                ", yearOfProduction=" + yearOfProduction +
+                ", screenSize=" + screenSize +
+                ", operatingSystem='" + operatingSystem + '\'' +
+                '}';
     }
 
     @Override

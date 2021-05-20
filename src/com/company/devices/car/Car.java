@@ -1,23 +1,26 @@
-package com.company.devices;
+package com.company.devices.car;
 
 import com.company.Human;
+import com.company.devices.Device;
 import com.company.enums.COLOR;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Car extends Device{
+public abstract class Car extends Device {
 
     public COLOR color;
     public final int doors;
     public Double value;
 
-    public Car(String producer, String model, LocalDate yearOfProduction, COLOR color, int doors, Double value) {
+    protected Car(String producer, String model, LocalDate yearOfProduction, COLOR color, int doors, Double value) {
         super(producer, model, yearOfProduction);
         this.color = color;
         this.doors = doors;
         this.value = value;
     }
+
+    public abstract void refuel();
 
     @Override
     public void turnOn() {
