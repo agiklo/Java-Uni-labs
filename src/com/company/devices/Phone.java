@@ -43,10 +43,9 @@ public class Phone extends Device{
     }
 
     public void getFreeApplications(){
-        Set<Application> freeApps = applications.stream()
+        applications.stream()
                 .filter(application -> application.price == 0)
-                .collect(Collectors.toSet());
-        freeApps.forEach(System.out::println);
+                .forEach(System.out::println);
     }
 
     public Double getTotalValueOfApplications(){
@@ -56,22 +55,20 @@ public class Phone extends Device{
     }
 
     public void getApplicationsSortedAscByName(){
-        List<Application> sortedApps = applications.stream()
+        applications.stream()
                 .sorted(Comparator.comparing(application -> application.name))
-                .collect(Collectors.toList());
-        sortedApps.forEach(System.out::println);
+                .forEach(System.out::println);
     }
 
     public void getApplicationsSortedAscByPrice() {
-        List<Application> sortedApps = applications.stream()
+        applications.stream()
                 .sorted(Comparator.comparing(application -> application.price))
-                .collect(Collectors.toList());
-        sortedApps.forEach(System.out::println);
+                .forEach(System.out::println);
     }
 
     public void installAnApp(String name) throws Exception {
         if (name.equals("")) {
-            throw new Exception("The application must have a name");
+            throw new Exception("The application must possess a name");
         }
         this.installAnApp(name, "latest");
     }
