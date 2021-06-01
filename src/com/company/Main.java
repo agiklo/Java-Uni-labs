@@ -1,33 +1,42 @@
 package com.company;
 
-import com.company.devices.car.Car;
-import com.company.devices.car.Electric;
-import com.company.enums.COLOR;
-
+import com.company.devices.Application;
+import com.company.devices.Phone;
 import java.time.LocalDate;
-import java.util.Arrays;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        Human human = new Human("Mateusz", "Milewczyk", 5);
-        Human huma2 = new Human("Mirek", "Mar", 5);
+        Phone iphone = new Phone("Apple", "X", LocalDate.of(2019, 1, 1), 2000.0, 5.3, "IOS");
+        Application facebook = new Application("facebook", "latest", 0.0);
+        Application twitter = new Application("twitter", "latest", 0.0);
+        Application netflix = new Application("netflix", "latest", 42.0);
+        Application hbo = new Application("hbo", "latest", 21.0);
+
+        Human human = new Human("Mateusz", "Milewczyk", null, iphone, 5, 4000.0);
         human.setSalary(5_000_000.00);
-        huma2.setSalary(5_000_000.00);
-        human.cash = 3223223.0;
-        huma2.cash= 200000.0;
 
-        Car tesla = new Electric("Tesla", "X", LocalDate.of(2017, 1, 1), COLOR.BLACK, 5, 277_000.0, human);
+        iphone.installAnApp(facebook, human);
+        System.out.println(iphone.isApplicationInstalled("facebook"));
+        System.out.println(iphone.isApplicationInstalled(facebook));
+        System.out.println(iphone.isApplicationInstalled("twitter"));
+        System.out.println(iphone.isApplicationInstalled(twitter));
 
-        System.out.println(tesla.amountOfTransactions());
-        System.out.println(tesla.hasBeenAnOwner(human));
-        System.out.println(tesla.hasBeenAnOwner(huma2));
+        iphone.installAnApp(twitter, human);
+        iphone.installAnApp(netflix, human);
+        iphone.installAnApp(hbo, human);
 
-        tesla.sell(human, huma2, 1000.0);
-        System.out.println(tesla.hasBeenASeller(human, huma2));
-        System.out.println(tesla.amountOfTransactions());
+        System.out.println("============ FREE APPS ============");
+        iphone.getFreeApplications();
 
-        Arrays.stream(huma2.garage).forEach(System.out::println);
-        Arrays.stream(human.garage).forEach(System.out::println);
+        System.out.println("============ ASCENDING SORTED BY NAME ============");
+        iphone.getApplicationsSortedAscByName();
+
+        System.out.println("Total value of apps: " + iphone.getTotalValueOfApplications());
+
+        System.out.println("============ ASCENDING SORTED BY PRICE ============");
+        iphone.getApplicationsSortedAscByPrice();
+
+
     }
 }

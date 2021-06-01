@@ -5,7 +5,8 @@ import com.company.Human;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Phone extends Device{
 
@@ -14,11 +15,58 @@ public class Phone extends Device{
     public static final String DEFAULT_APP_PROTOCOL = "Https";
     public static final String DEFAULT_APP_SERVER = "agiklo.apps.appstore.com";
     public static final String DEFAULT_APP_NAME = "photomath";
+    public Set<Application> applications = new HashSet<>();
 
     public Phone(String producer, String model, LocalDate yearOfProduction, Double value, Double screenSize, String operatingSystem) {
         super(producer, model, yearOfProduction, value);
         this.screenSize = screenSize;
         this.operatingSystem = operatingSystem;
+    }
+
+    public void installAnApp(Application application, Human buyer) throws Exception {
+        if (buyer.cash < application.price){
+            throw new Exception("You don't have enought money");
+        }
+        applications.add(application);
+        buyer.cash -= application.price;
+    }
+
+    public boolean isApplicationInstalled(Application application){
+        return applications.contains(application);
+    }
+
+    public boolean isApplicationInstalled(String name){
+        Set<String> applicationNames = applications.stream()
+                .map(application -> application.name)
+                .collect(Collectors.toSet());
+        return applicationNames.contains(name);
+    }
+
+    public void getFreeApplications(){
+        Set<Application> freeApps = applications.stream()
+                .filter(application -> application.price == 0)
+                .collect(Collectors.toSet());
+        freeApps.forEach(System.out::println);
+    }
+
+    public Double getTotalValueOfApplications(){
+        return applications.stream()
+                .mapToDouble(application -> application.price)
+                .sum();
+    }
+
+    public void getApplicationsSortedAscByName(){
+        List<Application> sortedApps = applications.stream()
+                .sorted(Comparator.comparing(application -> application.name))
+                .collect(Collectors.toList());
+        sortedApps.forEach(System.out::println);
+    }
+
+    public void getApplicationsSortedAscByPrice() {
+        List<Application> sortedApps = applications.stream()
+                .sorted(Comparator.comparing(application -> application.price))
+                .collect(Collectors.toList());
+        sortedApps.forEach(System.out::println);
     }
 
     public void installAnApp(String name) throws Exception {
